@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+  
+  # MYSQL
+  mysql:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=default
+      - MYSQL_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=root
+      - TZ=UTC
+    volumes:
+      - mysql-db-data:/var/mysql/warehouse/mysql:rw
+    ports:
+      - '3308:3306'
+    networks:
+      - backend
+
+  # TODO Redis
+  # redis:
+  #   image: redis:latest
+  #   volumes:
+  #     - redis-data:/data
+  #   ports:
+  #     - "6379:6379"
+  #   networks:
+  #     - backend
+
+  # Node js server
+  node:
+    restart: always
+    build: .
+    ports:
+      - 8080:8000
+    environment:
+      APP_ENV: local
+    volumes:
+      - ./:/var/app:rw,cached
+      - node-modules:/var/node/warehouse/node_modules
+    links:
+      - mysql
+    depends_on: 
+      - mysql
+    networks:
+      - backend
+
+# Volumes
+volumes:
+  node-modules:
+    name: node-modules
+  mysql-db-data:
+    name: mysql-db-data
+
+# Networks
+networks:
+  backend:
+    name: backend
