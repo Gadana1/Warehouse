@@ -1,7 +1,7 @@
 # Warehouse
 Managing product inventory requires adding products to a product catalog and adding warehouses to store the products. A system administrator control access rights for users.
 
-## Features:
+## Features
 - Add product
 - Add warehouse
 - Stock
