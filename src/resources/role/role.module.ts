@@ -10,7 +10,7 @@ import { Role } from './entities/role.entity';
   ],
   controllers: [RoleController],
   providers: [RoleService],
-  // Export service to be used in other modules
+  // Export service to be used in other modules that imports this module
   exports: [RoleService],
 })
 export class RoleModule {}

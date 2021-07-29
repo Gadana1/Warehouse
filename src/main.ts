@@ -4,7 +4,6 @@ import * as dotenv from 'dotenv';
 dotenv.config()
 
 import { NestFactory } from '@nestjs/core';
-
 import { CrudConfigService } from '@nestjsx/crud';
 // Global CRUD config: Must be defined before Appmodule
 CrudConfigService.load({
@@ -55,6 +54,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
         in: 'header',
       },
     )
+    .addTag("Home")
+    .addTag("Auth")
+    .addTag("Role")
+    .addTag("User")
+    .addTag("Product")
+    .addTag("Warehouse")
+    .addTag("Warehouse Product")
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

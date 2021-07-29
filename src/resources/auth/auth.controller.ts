@@ -1,5 +1,6 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { Request as HttpRequest } from 'express';
 import { LocalAuthGuard } from 'src/guards/local/local.guard';
 import { AuthService } from './auth.service';
@@ -16,6 +17,7 @@ export class AuthController {
    * Login to get JWT access token
    * @param req 
    */
+  @Throttle(3, 60)
   @ApiOperation({
     summary: "Login to get JWT access token",
   })
@@ -33,6 +35,7 @@ export class AuthController {
    * Register new user
    * @param req 
    */
+  @Throttle(3, 60)
   @ApiOperation({
     summary: "Register new user",
   })

@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../user/entities/user.entity';
 import { RegisterDto } from './dto/register.dto';
+import { AppConfig } from '../../configs/app'
 
 @Injectable()
 export class AuthService {
@@ -34,7 +35,7 @@ export class AuthService {
   async login(user: User|any) {
     const payload = { sub: user.id };
     return {
-      access_token: this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY, expiresIn: "24h" }),
+      access_token: this.jwtService.sign(payload, { secret: AppConfig.jwtSecretKey, expiresIn: AppConfig.jwtTokenExpiry }),
     };
   }
 

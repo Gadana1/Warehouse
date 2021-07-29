@@ -15,7 +15,7 @@ import { Permission } from '../role/permissions/permission.enum';
   ],
   controllers: [UserController],
   providers: [UserService],
-  // Export service to be used in other modules
+  // Export service to be used in other modules that imports this module
   exports: [UserService],
 
 })

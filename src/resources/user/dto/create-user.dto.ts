@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsBoolean, IsDateString, IsEmail, IsOptional, IsString } from "class-validator";
+import { IsArray, IsBoolean, IsDateString, IsEmail, IsOptional, IsString } from "class-validator";
+import { Role } from "src/resources/role/entities/role.entity";
 
 export class CreateUserDto {
   
@@ -24,6 +25,13 @@ export class CreateUserDto {
   @IsDateString()
   @IsOptional()
   @ApiProperty()
-  suspendedAt: Date;
+  suspendedAt?: Date;
+
+  @IsArray()
+  @IsOptional()
+  @ApiProperty({
+    type: [Role]
+  })
+  roles?: Role[];
 
 }

@@ -19,7 +19,7 @@ export class UserService extends TypeOrmCrudService<User> {
 
   /**
    * Save User
-   * @param {CreateUserDto} dto 
+   * @param {User} dto 
    * @returns {Promise<User>}
    */
   async save(user: User): Promise<User> {
@@ -71,6 +71,14 @@ export class UserService extends TypeOrmCrudService<User> {
     if (dto.password) {
       const salt = bcrypt.genSaltSync(10);
       dto.password = bcrypt.hashSync(String(dto.password), salt);
+    }
+    // Validate Role
+    if(dto.roles){
+      for (const role of dto.roles) {
+        if(!(await this.roleService.findOne(Number(role.id)))){
+          throw new NotFoundException(`Failed to find role with id ${role.id}`)
+        }
+      }
     }
     return super.createOne(req, dto);
   }

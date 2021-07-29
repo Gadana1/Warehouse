@@ -1,6 +1,7 @@
 import {ConnectionOptions} from 'typeorm';
 import * as path from 'path'
 
+import { AppConfig } from './app';
 
 /* 
 You can load you .env file here synchronously using dotenv package (not installed here),
@@ -14,7 +15,7 @@ You can also make a singleton service that load and expose the .env file content
 Check typeORM documentation for more information. 
 */
 
-const config: ConnectionOptions = {
+export const OrmConfig: ConnectionOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT) || 3306,
@@ -23,13 +24,13 @@ const config: ConnectionOptions = {
   database: process.env.DB_NAME,
   entities: [path.dirname(__dirname) + '/**/*.entity{.ts,.js}'],
   // Synchronize entity changes with database structure. 
-  // Beware, can lead to  unexpected outcomes. (process.env.NODE_ENV === 'local')
+  // Beware, can lead to  unexpected outcomes.
   synchronize: false, 
       
   // Run migrations automatically,
   // you can disable this if you prefer running migration manually.
   migrationsRun: true,
-  logging: true,
+  logging: !AppConfig.isProduction,
   logger: 'file',
 
   // Allow both start:prod and start:dev to use migrations
@@ -42,5 +43,3 @@ const config: ConnectionOptions = {
     migrationsDir: 'src/migrations',
   },
 };
-
-export = config;

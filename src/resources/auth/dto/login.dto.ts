@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsBoolean, IsEmail, IsOptional, IsString } from "class-validator";
+import { IsEmail, IsString } from "class-validator";
 
 export class LoginDto {
   

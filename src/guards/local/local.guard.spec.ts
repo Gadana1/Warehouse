@@ -1,7 +1,8 @@
-import { LocalGuard } from './local.guard';
+import { Reflector } from '@nestjs/core';
+import { LocalAuthGuard } from './local.guard';
 
-describe('LocalGuard', () => {
+describe('LocalAuthGuard', () => {
   it('should be defined', () => {
-    expect(new LocalGuard()).toBeDefined();
+    expect(new LocalAuthGuard(new Reflector())).toBeDefined();
   });
 });

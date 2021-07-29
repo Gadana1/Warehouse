@@ -54,6 +54,16 @@ export class RoleService extends TypeOrmCrudService<Role> {
   }
 
   /**
+   * Delete One record
+   * @override
+   * @param {CrudRequest} req 
+   * @returns {Promise<Role>}
+   */
+   async deleteOne(req: CrudRequest): Promise<Role> {
+    return this.repo.softRemove(await this.getOneOrFail(req));
+  }
+  
+  /**
    * Add Permission
    * @override
    * @param {CrudRequest} req 
@@ -75,7 +85,6 @@ export class RoleService extends TypeOrmCrudService<Role> {
 
   /**
    * Remove Permission from User
-   * @override
    * @param {CrudRequest} req 
    * @param {Permission} permission 
    * @returns {Promise<Role>}

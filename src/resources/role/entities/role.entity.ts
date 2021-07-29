@@ -28,10 +28,10 @@ export class Role {
   @ApiProperty()
   deletedAt: Date;
 
+  @ApiProperty()
   @Column({ type: 'json' })
   permissions: Permission[];
 
   @ManyToMany(() => User, user => user.roles)
   users: User[];
-
 }

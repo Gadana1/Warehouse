@@ -42,9 +42,8 @@ export class User {
   @ApiProperty()
   deletedAt: Date;
 
-  @ApiProperty()
   @ManyToMany(() => Role, role => role.users, { eager: true })
-  // Only add for owner entity
+  // Only add for owner entity - for many to many relationshp
   @JoinTable({
     name: 'user_roles',
     joinColumn: { name: 'userId', referencedColumnName: 'id'},
