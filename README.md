@@ -1,7 +1,25 @@
 # Warehouse Management System
 Managing product inventory requires adding products to a product catalog and adding warehouses to store the products. A system administrator controls access rights for users.
+
+
+## System Specification
  
+- **Web Server** - Nodejs (NestJs Framework) - using Typescript
+NestJs is a very opinionated framework, and it helps keep everything organized. Each feature is organized into a separate Module which makes it easier to debug and modify.
+ 
+- **Database Server** - MYSQL 8+
+For a Warehouse Management system, data integrity is essential. In addition to that, flexibility and speed for querying large amounts of data is also vital. Hence, a RDBMS like MYSQL would be preferable
+
+- Docker Supported
+ 
+ 
+## Database ERD
+![Image or Database ERD]
+(https://github.com/Gadana1/Warehouse/blob/develop/docs/Warehouse%20Erd.jpg)
+ 
+
 ## Features
+
 ### Auth
 - Register as a user: Account can only be used after activation by an Admin. Admin will also need to assign a Role to the new User
 - Login: Upon success, a JWT Access Token will be dispensed, which can then be used to access protected APIs
@@ -62,15 +80,6 @@ and each of the units have unique information such as `barcode`, `Mfg Date`, `Ex
 - Delete Single Warehouse
 - Recover Deleted Warehouse
  
-## System Specification
- 
-- **Web Server** - Nodejs (NestJs Framework) - using Typescript
-NestJs is a very opinionated framework, and it helps keep everything organized. Each feature is organized into a separate Module which makes it easier to debug and modify.
- 
-- **Database Server** - MYSQL 8+
-For a Warehouse Management system, data integrity is essential. In addition to that, flexibility and speed for querying large amounts of data is also vital. Hence, a RDBMS like MYSQL would be preferable
-
-- Docker Supported
  
 ## Security
  
@@ -87,6 +96,7 @@ e.g `Product:*` Grants access to all User features
 and `*:*` is an Administrator Permission and grants access to everything
  
 - **Throttling** - All Endpoints are throttled to reduce chances of DDOS attacks - with a default of 100 requests every minute. Login and Registration endpoints however, have a default of 3 requests per minute.
+ 
  
 ## Installation
  
