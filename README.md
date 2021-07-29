@@ -70,7 +70,7 @@ For a Warehouse Management system, data integrity is essential. In addition to t
  
 ### Warehouse Product Management
 This is used for stocking and un-stocking products.
-It considers the fact one product can have multiple units in different warehouse
+It considers the fact that, one product can have multiple units in different warehouse
 and each of the units have unique information such as `barcode`, `Mfg Date`, `Expiry Date` etc.
 - Create Single Warehouse
 - Create Multiple Warehouses
@@ -95,7 +95,7 @@ Permissions also support wildcards.
 e.g `Product:*` Grants access to all User features
 and `*:*` is an Administrator Permission and grants access to everything
  
-- **Throttling** - All Endpoints are throttled to reduce chances of DDOS attacks - with a default of 100 requests every minute. Login and Registration endpoints however, have a default of 3 requests per minute.
+- **Throttling** - All Endpoints are throttled to reduce chances of DDOS attacks - with a default of 60 requests every minute. Login and Registration endpoints however, have a default of 3 requests per minute.
  
  
 ## Installation
@@ -140,7 +140,7 @@ $ npm run start:prod
 - Go to http://localhost:8080/docs
  
  
-## Test *(Pending development of test cases)*
+## Test *(pending development of test cases)*
  
 ```bash
 # unit tests
