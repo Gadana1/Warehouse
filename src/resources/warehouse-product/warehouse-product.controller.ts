@@ -56,12 +56,25 @@ import { Permission } from '../role/permissions/permission.enum';
       decorators: [
         Permissions(Permission.WarehouseProductReadOne)
       ]
-    }
+    },
   },
   // Override DTOs
   dto: {
     create: CreateWarehouseProductDto,
     update: UpdateWarehouseProductDto,
+  },
+  // Modify query result
+  query: {
+    join: {
+      product: {
+        allow: [],
+        eager: true
+      },
+      warehouse: {
+        allow: [],
+        eager: true
+      },
+    },
   }
 })
 

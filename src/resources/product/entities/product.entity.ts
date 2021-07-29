@@ -37,4 +37,10 @@ export class Product {
 
   @OneToMany(() => WarehouseProduct, wp => wp.product)
   warehouseProducts: WarehouseProduct[];
+
+  @ApiProperty({ required: false })
+  stock?: Number;
+  
+  @ApiProperty({ required: false })
+  stockAvailable?: Number;
 }

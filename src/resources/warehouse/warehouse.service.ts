@@ -14,6 +14,28 @@ export class WarehouseService extends TypeOrmCrudService<Warehouse>  {
 
 
   /**
+   * Get One - Override to customize
+   * 
+   * @override
+   * @param {CrudRequest} req 
+   * @returns {Promise<Warehouse>}
+   */
+   async getOne(req: CrudRequest): Promise<Warehouse>{
+
+    req.options.query.join = { 'warehouseProducts': { eager: true }}
+    const warehouse = await super.getOne(req);
+    
+    // Get Count of products in the warehouse
+    if(warehouse && warehouse.warehouseProducts) {
+      warehouse.products = warehouse.warehouseProducts.length;
+      warehouse.productsAvailable = warehouse.warehouseProducts.filter(wh => wh.deletedAt === null).length;
+      delete warehouse.warehouseProducts;
+    }
+
+    return warehouse;
+  }
+
+  /**
    * Delete One record
    * @override
    * @param {CrudRequest} req 

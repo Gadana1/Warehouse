@@ -36,7 +36,6 @@ export class UpdateWarehouseDto extends PartialType(CreateWarehouseDto) {
   countryCode: String;
 
   @IsString()
-  @IsPostalCode()
   @IsOptional()
   @ApiProperty()
   postCode: String;

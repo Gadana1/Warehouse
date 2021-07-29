@@ -28,7 +28,6 @@ export class CreateWarehouseDto {
   countryCode: String;
 
   @IsString()
-  @IsPostalCode()
   @ApiProperty()
   postCode: String;
 
