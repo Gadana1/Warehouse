@@ -38,9 +38,17 @@ Managing product inventory requires adding products to a product catalog and add
 ```bash
 # install pakages
 $ npm install
+
 # create env file
 $ cp .env.example .env
 ```
+- Set environment variable `DEFAULT_ADMIN_EMAIL` in `.env` file. e.g `DEFAULT_ADMIN_EMAIL="blah@blah.com"`
+- Set environment variable `DEFAULT_ADMIN_PASSWORD` in `.env` file. e.g `DEFAULT_ADMIN_PASSWORD="blah12345!"`
+
+- Set environment variable `JWT_SECRET_KEY` in `.env` file. Random key of attlist 512 bits or 64 bytes
+
+- Set Database Credentials in `.env` file.
+
 
 ## Running the app
 

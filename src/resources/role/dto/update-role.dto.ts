@@ -1,0 +1,16 @@
+import { PartialType } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjsx/crud/lib/crud";
+import { IsArray, IsString } from "class-validator";
+import { Permission } from '../permissions/permission.enum';
+import { CreateRoleDto } from './create-role.dto';
+
+export class UpdateRoleDto extends PartialType(CreateRoleDto) {
+
+  @IsString()
+  @ApiProperty()
+  name: string;
+
+  @IsArray()
+  @ApiProperty()
+  permissions: Permission[];
+}

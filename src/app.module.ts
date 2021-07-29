@@ -3,6 +3,13 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UserModule } from './resources/user/user.module';
+import { RoleModule } from './resources/role/role.module';
+import { AuthModule } from './resources/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './guards/jwt/jwt.guard';
+import { PermissionGuard } from './guards/permission/permission.guard';
+import * as ormconfig from './configs/typeorm';
 
 @Module({
   imports: [
@@ -10,19 +17,25 @@ import { AppService } from './app.service';
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: () => ({
-        type: 'mysql',
-        host: process.env.DB_HOST,
-        port: parseInt(process.env.DB_PORT) || 3306,
-        username: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME,
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: false
-      })
-    })
+      useFactory: () => ormconfig
+    }),
+    UserModule,
+    RoleModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // Global JWT Authentication 
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    // Global RBAC Authorization
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
+    },
+  ],
 })
 export class AppModule {}
