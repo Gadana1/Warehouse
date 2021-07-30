@@ -87,12 +87,10 @@ and each of the units have unique information such as `barcode`, `Mfg Date`, `Ex
  
 - **RBAC** - Every `/api` endpoint is protected by Permissions. Users have Roles, and Roles have Permissions.
 Hence, to access a protected endpoint, you need to do so with a user account with a Role that has granted the needed Permission.
-
 Permissions are in the format `Feature:Access`.
 e.g `User:Read-All` Grants access to view all Users.
-
 Permissions also support wildcards.
-e.g `Product:*` Grants access to all User features
+e.g `Product:*` Grants access to all Product features
 and `*:*` is an Administrator Permission and grants access to everything
  
 - **Throttling** - All Endpoints are throttled to reduce chances of DDOS attacks - with a default of 60 requests every minute. Login and Registration endpoints however, have a default of 3 requests per minute.
@@ -118,16 +116,16 @@ $ cp .env.example .env
 ## Running the app
  
 ```bash
-# with docker - development
+# with docker - development mode
 $ docker-compose up
  
-# without docker - development
+# without docker - development mode
 $ npm run start
  
-# without docker - watch mode
+# without docker - development watch mode
 $ npm run start:dev
  
-# production mode
+# without docker - production mode
 $ npm run start:prod
 ```
  
