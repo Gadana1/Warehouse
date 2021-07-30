@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { WarehouseProductService } from './warehouse-product.service';
 import { CreateWarehouseProductDto } from './dto/create-warehouse-product.dto';
 import { UpdateWarehouseProductDto } from './dto/update-warehouse-product.dto';

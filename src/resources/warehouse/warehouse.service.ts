@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CrudRequest } from '@nestjsx/crud';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { Repository } from 'typeorm';
 import { Warehouse } from './entities/warehouse.entity';
+import { WarehouseProductService } from '../warehouse-product/warehouse-product.service';
 
 @Injectable()
 export class WarehouseService extends TypeOrmCrudService<Warehouse>  {
-  
-  constructor(@InjectRepository(Warehouse) repo: Repository<Warehouse>) {
+
+  constructor(@InjectRepository(Warehouse) repo: Repository<Warehouse>, 
+              // Inject forward ref of service to handle circular dependencies
+              @Inject(forwardRef(() => WarehouseProductService)) private warehouseProductService: WarehouseProductService) {
     super(repo);
   }
 
@@ -22,14 +25,12 @@ export class WarehouseService extends TypeOrmCrudService<Warehouse>  {
    */
    async getOne(req: CrudRequest): Promise<Warehouse>{
 
-    req.options.query.join = { 'warehouseProducts': { eager: true }}
     const warehouse = await super.getOne(req);
     
     // Get Count of products in the warehouse
-    if(warehouse && warehouse.warehouseProducts) {
-      warehouse.products = warehouse.warehouseProducts.length;
-      warehouse.productsAvailable = warehouse.warehouseProducts.filter(wh => wh.deletedAt === null).length;
-      delete warehouse.warehouseProducts;
+    if(warehouse) {
+      warehouse.products = await this.warehouseProductService.getCountForWarehouse(warehouse.id);
+      warehouse.productsAvailable = await this.warehouseProductService.getCountForWarehouse(warehouse.id, true);
     }
 
     return warehouse;

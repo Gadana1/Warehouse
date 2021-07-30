@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateWarehouseDto } from './create-warehouse.dto';
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsOptional, IsPostalCode, IsString } from "class-validator";
+import { IsOptional, IsString } from "class-validator";
 
 export class UpdateWarehouseDto extends PartialType(CreateWarehouseDto) {
 
