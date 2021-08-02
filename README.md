@@ -1,4 +1,9 @@
 # Warehouse Management System
+
+[![CodeFactor](https://www.codefactor.io/repository/github/gadana1/warehouse/badge/main)](https://www.codefactor.io/repository/github/gadana1/warehouse/overview/main)
+
+## Description
+
 Managing product inventory requires adding products to a product catalog and adding warehouses to store the products. A system administrator controls access rights for users.
 
 
