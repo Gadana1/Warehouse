@@ -67,11 +67,9 @@ import { Permission } from '../role/permissions/permission.enum';
   query: {
     join: {
       product: {
-        allow: [],
         eager: true
       },
       warehouse: {
-        allow: [],
         eager: true
       },
     },

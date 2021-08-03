@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsArray, IsBoolean, IsDateString, IsEmail, IsOptional, IsString } from "class-validator";
-import { Role } from "src/resources/role/entities/role.entity";
+import { Role } from "../../role/entities/role.entity";
 
 export class CreateUserDto {
   

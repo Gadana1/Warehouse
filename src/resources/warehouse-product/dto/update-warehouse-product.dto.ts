@@ -3,8 +3,8 @@ import { CreateWarehouseProductDto } from './create-warehouse-product.dto';
 
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsDateString, IsOptional, IsString } from "class-validator";
-import { Product } from "src/resources/product/entities/product.entity";
-import { Warehouse } from "src/resources/warehouse/entities/warehouse.entity";
+import { Product } from "../../product/entities/product.entity";
+import { Warehouse } from "../../warehouse/entities/warehouse.entity";
 
 export class UpdateWarehouseProductDto extends PartialType(CreateWarehouseProductDto) {
 
