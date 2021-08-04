@@ -167,7 +167,7 @@ export class UserService extends TypeOrmCrudService<User> {
   }
 
   /**
-   * Delete One record
+   * Activate account
    * @override
    * @param {CrudRequest} req 
    * @returns {Promise<User>}
