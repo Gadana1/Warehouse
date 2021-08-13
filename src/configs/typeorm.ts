@@ -26,7 +26,7 @@ export const OrmConfig: ConnectionOptions = {
   // Synchronize entity changes with database structure.
   // Beware, can lead to  unexpected outcomes.
   synchronize: false,
-      
+
   // Run migrations automatically,
   // you can disable this if you prefer running migration manually.
   migrationsRun: true,
