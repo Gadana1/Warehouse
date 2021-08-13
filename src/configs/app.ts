@@ -1,4 +1,4 @@
-export const AppConfig = {
+const AppConfig = {
   // Define Environment
   env: process.env.NODE_ENV || process.env.ENV,
   isLocal: (process.env.NODE_ENV || process.env.ENV) === 'local',
@@ -17,3 +17,4 @@ export const AppConfig = {
   throttleTTL: process.env.THROTTLE_TTL || 60,
   throttleLimit: process.env.THROTTLE_LIMIT || 60,
 };
+export default AppConfig;

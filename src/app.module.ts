@@ -17,8 +17,8 @@ import { ProductModule } from './resources/product/product.module';
 import { WarehouseModule } from './resources/warehouse/warehouse.module';
 import { WarehouseProductModule } from './resources/warehouse-product/warehouse-product.module';
 
-import { AppConfig } from './configs/app';
-import { OrmConfig } from './configs/typeorm';
+import AppConfig from './configs/app';
+import OrmConfig from './configs/typeorm';
 
 @Module({
   imports: [

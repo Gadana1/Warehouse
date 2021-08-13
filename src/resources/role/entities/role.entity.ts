@@ -11,6 +11,12 @@ import {
 } from 'typeorm';
 import { Permission } from '../permissions/permission.enum';
 
+// Define defualt roles for system
+export const DEFAULT_ROLES = {
+  ADMINISTRATOR: 'Administrator',
+  USER: 'User',
+};
+
 @Entity({
   name: 'role',
 })

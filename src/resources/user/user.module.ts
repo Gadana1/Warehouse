@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { RoleModule } from '../role/role.module';
 import { RoleService } from '../role/role.service';
-import { Role } from '../role/entities/role.entity';
+import { DEFAULT_ROLES, Role } from '../role/entities/role.entity';
 import { Permission } from '../role/permissions/permission.enum';
 
 @Module({
@@ -45,23 +45,24 @@ export class UserModule {
           // Set up role
           let role: Role = null;
           if (!(await this.roleService.count())) {
+            // Admin Role
+            role = await this.roleService.create({
+              name: DEFAULT_ROLES.ADMINISTRATOR,
+              permissions: [Permission.Admin],
+            });
+
             // User Role
             this.roleService.create({
-              name: 'User',
+              name: DEFAULT_ROLES.USER,
               permissions: [
                 Permission.AdminProduct,
                 Permission.AdminWarehouse,
                 Permission.AdminWarehouseProduct,
               ],
             });
-            // Admin Role
-            role = await this.roleService.create({
-              name: 'Administrator',
-              permissions: [Permission.Admin],
-            });
           } else {
             role = await this.roleService.findOne({
-              where: { name: 'Administrator' },
+              where: { name: DEFAULT_ROLES.ADMINISTRATOR },
             });
           }
 

@@ -7,6 +7,7 @@ import { DeepPartial, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { RoleService } from '../role/role.service';
 import { CreateUserDto } from './dto/create-user.dto';
+import { DEFAULT_ROLES } from '../role/entities/role.entity';
 
 @Injectable()
 export class UserService extends TypeOrmCrudService<User> {
@@ -152,7 +153,9 @@ export class UserService extends TypeOrmCrudService<User> {
       user.active = true;
       if (!user.roles || user.roles.length === 0) {
         user.roles = [
-          await this.roleService.findOne({ where: { name: 'User' } }),
+          await this.roleService.findOne({
+            where: { name: DEFAULT_ROLES.USER },
+          }),
         ];
       }
       return this.save(user);
