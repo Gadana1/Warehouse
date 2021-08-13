@@ -8,7 +8,7 @@ import { Permission } from '../role/permissions/permission.enum';
 import { CreateWarehouseDto } from './dto/create-warehouse.dto';
 import { UpdateWarehouseDto } from './dto/update-warehouse.dto';
 
-// Use crud library to 
+// Use crud library to
 // Generates basic CRUD operations
 @Crud({
   // Define Model to use for CRUD

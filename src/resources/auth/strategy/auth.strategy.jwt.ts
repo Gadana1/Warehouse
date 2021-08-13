@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   /**
    * Validate jwt payload - Called by passport JWT strategy flow
-   * 
+   *
    * @param payload
    * @returns {Promise<any>}
    */

@@ -9,7 +9,7 @@ import { Product } from './entities/product.entity';
 @Injectable()
 export class ProductService extends TypeOrmCrudService<Product> {
 
-  constructor(@InjectRepository(Product) repo: Repository<Product>, 
+  constructor(@InjectRepository(Product) repo: Repository<Product>,
               // Inject forward ref of service to handle circular dependencies
               @Inject(forwardRef(() => WarehouseProductService)) private warehouseProductService: WarehouseProductService) {
     super(repo);
@@ -18,7 +18,7 @@ export class ProductService extends TypeOrmCrudService<Product> {
   
   /**
    * Get One - Override to customize
-   * 
+   *
    * @override
    * @param {CrudRequest} req
    * @returns {Promise<Product>}

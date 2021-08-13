@@ -9,7 +9,7 @@ import { Permission } from './permissions/permission.enum';
 import { UpdateRolePermissionDto } from './dto/update-role-permission.dto';
 import { Permissions } from './permissions/permissions.decorator';
 
-// Use crud library to 
+// Use crud library to
 // Generates basic CRUD operations
 @Crud({
   // Define Model to use for CRUD

@@ -34,7 +34,7 @@ export class PermissionGuard implements CanActivate {
    * Check if wild card permission matches
    * @param required
    * @param current
-   * @returns 
+   * @returns
    */
   checkWildCard(required: string, current: string){
     const [reqFeature, reqAccess] = required.split(':');
