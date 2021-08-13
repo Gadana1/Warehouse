@@ -18,7 +18,6 @@ import * as cookie_parser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 (async () => {
-
   // Create Nest App using AppModule as root module
   const app = await NestFactory.create(AppModule);
 
