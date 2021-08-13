@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  
+
   # MYSQL
   mysql:
     image: mysql:latest
@@ -16,7 +16,7 @@ services:
       - '3308:3306'
     networks:
       - backend
-      
+
   # Node js server
   node:
     restart: always
@@ -30,7 +30,7 @@ services:
       - node-modules:/var/node/warehouse/node_modules
     links:
       - mysql
-    depends_on: 
+    depends_on:
       - mysql
     networks:
       - backend

@@ -32,8 +32,8 @@ export class PermissionGuard implements CanActivate {
 
   /**
    * Check if wild card permission matches
-   * @param required 
-   * @param current 
+   * @param required
+   * @param current
    * @returns 
    */
   checkWildCard(required: string, current: string){

@@ -19,7 +19,7 @@ export class UserService extends TypeOrmCrudService<User> {
 
   /**
    * Save User
-   * @param {User} dto 
+   * @param {User} dto
    * @returns {Promise<User>}
    */
   async save(user: User): Promise<User> {
@@ -28,7 +28,7 @@ export class UserService extends TypeOrmCrudService<User> {
 
   /**
    * Create new User
-   * @param {CreateUserDto} dto 
+   * @param {CreateUserDto} dto
    * @returns {Promise<User>}
    */
   async create(dto: CreateUserDto): Promise<User> {
@@ -46,8 +46,8 @@ export class UserService extends TypeOrmCrudService<User> {
   /**
    * Create One record
    * @override
-   * @param {CrudRequest} req 
-   * @param {DeepPartial<User>} dto 
+   * @param {CrudRequest} req
+   * @param {DeepPartial<User>} dto
    * @returns {Promise<User>}
    */
   async createOne(req: CrudRequest, dto: DeepPartial<User>): Promise<User> {
@@ -65,8 +65,8 @@ export class UserService extends TypeOrmCrudService<User> {
   /**
    * Create Many records
    * @override
-   * @param {CrudRequest} req 
-   * @param {CreateManyDto} dto 
+   * @param {CrudRequest} req
+   * @param {CreateManyDto} dto
    * @returns {Promise<User>}
    */
   async createMany(req: CrudRequest, dto: CreateManyDto<User>): Promise<User[]> {
@@ -89,7 +89,7 @@ export class UserService extends TypeOrmCrudService<User> {
   /**
    * Delete One record
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
   async deleteOne(req: CrudRequest): Promise<User> {
@@ -99,8 +99,8 @@ export class UserService extends TypeOrmCrudService<User> {
   /**
    * Add Role
    * @override
-   * @param {CrudRequest} req 
-   * @param {Number} roleId 
+   * @param {CrudRequest} req
+   * @param {Number} roleId
    * @returns {Promise<User>}
    */
    async addRole(req: CrudRequest, roleId: Number): Promise<User> {
@@ -119,8 +119,8 @@ export class UserService extends TypeOrmCrudService<User> {
   /**
    * Remove Role from User
    * @override
-   * @param {CrudRequest} req 
-   * @param {Number} roleId 
+   * @param {CrudRequest} req
+   * @param {Number} roleId
    * @returns {Promise<User>}
    */
   async removeRole(req: CrudRequest, roleId: Number): Promise<User> {
@@ -135,7 +135,7 @@ export class UserService extends TypeOrmCrudService<User> {
   /**
    * Activate account
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
    async activate(req: CrudRequest): Promise<User> {
@@ -156,7 +156,7 @@ export class UserService extends TypeOrmCrudService<User> {
   /**
    * Suspend account
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
    async suspend(req: CrudRequest): Promise<User> {

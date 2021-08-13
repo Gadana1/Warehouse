@@ -80,7 +80,7 @@ export class WarehouseController implements CrudController<Warehouse>{
 
   /**
    * Recover deleted Warehouse
-   * @param req 
+   * @param req
    */
    @Permissions(Permission.WarehouseRecoverOne)
    @ApiOperation({

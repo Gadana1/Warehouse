@@ -89,7 +89,7 @@ export class WarehouseProductController implements CrudController<WarehouseProdu
 
   /**
    * Recover deleted Warehouse Product
-   * @param req 
+   * @param req
    */
    @Permissions(Permission.UserRecoverOne)
    @ApiOperation({

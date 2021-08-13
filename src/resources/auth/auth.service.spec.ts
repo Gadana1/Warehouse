@@ -13,7 +13,7 @@ describe('AuthService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [ 
+      imports: [
         UserModule,
         PassportModule,
         JwtModule.register({
@@ -33,6 +33,6 @@ describe('AuthService', () => {
 
 
   it('should have accss_token', () => {
-    expect(service.login({id: 1})).toMatchObject({access_token: ''});
+    expect(service.login({ id: 1 })).toMatchObject({ access_token: '' });
   });
 });

@@ -20,7 +20,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 (async function () {
 
-
   // Create Nest App using AppModule as root module
   const app = await NestFactory.create(AppModule);
   

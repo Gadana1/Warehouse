@@ -15,7 +15,7 @@ export class RoleService extends TypeOrmCrudService<Role> {
 
   /**
    * Create new Role
-   * @param {CreateRoleDto} role 
+   * @param {CreateRoleDto} role
    * @returns {Promise<Role>}
    */
   async create(role: CreateRoleDto): Promise<Role> {
@@ -34,8 +34,8 @@ export class RoleService extends TypeOrmCrudService<Role> {
   /**
    * Update One record
    * @override
-   * @param {CrudRequest} req 
-   * @param {DeepPartial<Role>} dto 
+   * @param {CrudRequest} req
+   * @param {DeepPartial<Role>} dto
    * @returns {Promise<User>}
    */
    async updateOne(req: CrudRequest, dto: DeepPartial<Role>): Promise<Role> {
@@ -56,7 +56,7 @@ export class RoleService extends TypeOrmCrudService<Role> {
   /**
    * Delete One record
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<Role>}
    */
    async deleteOne(req: CrudRequest): Promise<Role> {
@@ -66,8 +66,8 @@ export class RoleService extends TypeOrmCrudService<Role> {
   /**
    * Add Permission
    * @override
-   * @param {CrudRequest} req 
-   * @param {Permission} permission 
+   * @param {CrudRequest} req
+   * @param {Permission} permission
    * @returns {Promise<Role>}
    */
    async addPermission(req: CrudRequest, permission: Permission): Promise<Role> {
@@ -85,8 +85,8 @@ export class RoleService extends TypeOrmCrudService<Role> {
 
   /**
    * Remove Permission from User
-   * @param {CrudRequest} req 
-   * @param {Permission} permission 
+   * @param {CrudRequest} req
+   * @param {Permission} permission
    * @returns {Promise<Role>}
    */
    async removePermission(req: CrudRequest, permission: Permission): Promise<Role> {

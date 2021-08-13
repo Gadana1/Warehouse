@@ -20,7 +20,7 @@ export class ProductService extends TypeOrmCrudService<Product> {
    * Get One - Override to customize
    * 
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<Product>}
    */
   async getOne(req: CrudRequest): Promise<Product>{
@@ -40,7 +40,7 @@ export class ProductService extends TypeOrmCrudService<Product> {
   /**
    * Delete One record
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
    async deleteOne(req: CrudRequest): Promise<Product> {

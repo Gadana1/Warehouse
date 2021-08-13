@@ -81,7 +81,7 @@ export class RoleController implements CrudController<Role>  {
 
   /**
    * Get list of all permissions
-   * @param req 
+   * @param req
    */
   @Permissions(Permission.RoleReadAllPermission)
   @ApiOperation({
@@ -95,8 +95,8 @@ export class RoleController implements CrudController<Role>  {
 
   /**
    * Add Permission to Role
-   * @param req 
-   * @param dto 
+   * @param req
+   * @param dto
    */
   @Permissions(Permission.RoleAddPermission)
   @ApiOperation({
@@ -125,8 +125,8 @@ export class RoleController implements CrudController<Role>  {
 
   /**
    * Remove Permission from Role
-   * @param req 
-   * @param dto 
+   * @param req
+   * @param dto
    */
   @Permissions(Permission.RoleRemovePermission)
   @ApiOperation({
@@ -155,7 +155,7 @@ export class RoleController implements CrudController<Role>  {
   
   /**
    * Recover deleted User
-   * @param req 
+   * @param req
    */
   @Permissions(Permission.RoleRecoverOne)
   @ApiOperation({

@@ -60,4 +60,4 @@ import { OrmConfig } from './configs/typeorm';
     }
   ],
 })
-export class AppModule {}
+export class AppModule { }

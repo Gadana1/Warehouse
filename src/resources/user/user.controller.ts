@@ -90,11 +90,11 @@ export class UserController implements CrudController<User> {
     return this;
   }
 
-  
+
   /**
    * Get current user info
-   * @param req 
-   * @param dto 
+   * @param req
+   * @param dto
    */
   @ApiOperation({
     summary: "Get current user info",
@@ -111,8 +111,8 @@ export class UserController implements CrudController<User> {
 
   /**
    * Add Role to User
-   * @param req 
-   * @param dto 
+   * @param req
+   * @param dto
    */
   @Permissions(Permission.UserAddRole)
   @ApiOperation({
@@ -141,8 +141,8 @@ export class UserController implements CrudController<User> {
 
   /**
    * Remove Role from User
-   * @param req 
-   * @param dto 
+   * @param req
+   * @param dto
    */
   @Permissions(Permission.UserRemoveRole)
   @ApiOperation({
@@ -171,7 +171,7 @@ export class UserController implements CrudController<User> {
 
   /**
    * Recover deleted User
-   * @param req 
+   * @param req
    */
   @Permissions(Permission.UserRecoverOne)
   @ApiOperation({
@@ -190,7 +190,7 @@ export class UserController implements CrudController<User> {
 
   /**
    * Reject or suspend user account
-   * @param req 
+   * @param req
    */
   @Permissions(Permission.UserSuspendOne)
   @ApiOperation({
@@ -209,7 +209,7 @@ export class UserController implements CrudController<User> {
 
   /**
    * Approve or activate user account"
-   * @param req 
+   * @param req
    */
   @Permissions(Permission.UserActivateOne)
   @ApiOperation({

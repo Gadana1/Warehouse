@@ -15,7 +15,7 @@ export class AuthController {
 
   /**
    * Login to get JWT access token
-   * @param req 
+   * @param req
    */
   @Throttle(3, 60)
   @ApiOperation({
@@ -33,7 +33,7 @@ export class AuthController {
 
   /**
    * Register new user
-   * @param req 
+   * @param req
    */
   @Throttle(3, 60)
   @ApiOperation({

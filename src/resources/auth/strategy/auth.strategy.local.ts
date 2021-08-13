@@ -14,8 +14,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
   /**
    * Verify user credentials - Called by passport Local strategy flow
-   * @param username 
-   * @param password 
+   * @param username@param username
+   * @param password
    * @returns {Promise<any>}
    */
   async validate(username: string, password: string): Promise<any> {

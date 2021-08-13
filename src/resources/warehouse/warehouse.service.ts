@@ -20,7 +20,7 @@ export class WarehouseService extends TypeOrmCrudService<Warehouse>  {
    * Get One - Override to customize
    * 
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<Warehouse>}
    */
    async getOne(req: CrudRequest): Promise<Warehouse>{
@@ -39,7 +39,7 @@ export class WarehouseService extends TypeOrmCrudService<Warehouse>  {
   /**
    * Delete One record
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
    async deleteOne(req: CrudRequest): Promise<Warehouse> {

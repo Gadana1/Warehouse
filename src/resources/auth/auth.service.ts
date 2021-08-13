@@ -9,16 +9,16 @@ import { AppConfig } from '../../configs/app'
 @Injectable()
 export class AuthService {
 
-  constructor(private userService: UserService, private jwtService: JwtService) {}
+  constructor(private userService: UserService, private jwtService: JwtService) { }
 
   /**
    * Validate User Credentials
-   * @param email 
-   * @param password 
+   * @param email
+   * @param password
    * @returns 
    */
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.userService.findOne({ where: { email: email }});
+    const user = await this.userService.findOne({ where: { email: email } });
     // Check password
     if (user && bcrypt.compareSync(password, String(user.password))) {
       const { password, ...result } = user;
@@ -32,7 +32,7 @@ export class AuthService {
    * @param user Login to user account
    * @returns 
    */
-  async login(user: User|any) {
+  async login(user: User | any) {
     const payload = { sub: user.id };
     return {
       access_token: this.jwtService.sign(payload, { secret: AppConfig.jwtSecretKey, expiresIn: AppConfig.jwtTokenExpiry }),

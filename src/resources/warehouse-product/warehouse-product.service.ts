@@ -19,8 +19,8 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
 
   /**
    * Get count of Warehouse Products for a particular Product
-   * @param productId 
-   * @param onlyAvailable 
+   * @param productId@param productId
+   * @param onlyAvailable
    * @returns {Promise<Number>}
    */
   async getCountForProduct(productId: Number, onlyAvailable = false): Promise<number> {
@@ -32,8 +32,8 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
 
   /**
    * Get count of Warehouse Products for a particular Warehouse
-   * @param warehouseId 
-   * @param onlyAvailable 
+   * @param warehouseId@param warehouseId
+   * @param onlyAvailable
    * @returns {Promise<Number>}
    */
    async getCountForWarehouse(warehouseId: Number, onlyAvailable = false): Promise<number> {
@@ -45,8 +45,8 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
   /**
    * Create One record
    * @override
-   * @param {CrudRequest} req 
-   * @param {DeepPartial<WarehouseProduct>} dto 
+   * @param {CrudRequest} req
+   * @param {DeepPartial<WarehouseProduct>} dto
    * @returns {Promise<WarehouseProduct>}
    */
   async createOne(req: CrudRequest, dto: DeepPartial<WarehouseProduct>): Promise<WarehouseProduct> {
@@ -68,7 +68,7 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
   /**
    * Delete One record
    * @override
-   * @param {CrudRequest} req 
+   * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
   async deleteOne(req: CrudRequest): Promise<WarehouseProduct> {

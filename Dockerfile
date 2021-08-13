@@ -18,7 +18,6 @@ RUN set -xe; \
 # Creating a new directory for app files and setting path in the container
 WORKDIR /var/app
 
-
 # Copy all files to the container file system
 COPY ./ .
 
@@ -30,5 +29,7 @@ USER root
 # Clean up
 RUN rm -rf /tmp/* /var/tmp/* && \
     rm -rf /var/log/lastlog /var/log/faillog
+
+USER guest
 
 CMD ["npm", "run", "start:dev"]

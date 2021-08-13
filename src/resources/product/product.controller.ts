@@ -69,8 +69,8 @@ import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger'
 @ApiTags('Product')
 @Controller('api/product')
 export class ProductController implements CrudController<Product> {
-  
-  constructor(public service: ProductService) {}
+
+  constructor(public service: ProductService) { }
 
   get base(): CrudController<Product> {
     return this;
@@ -78,19 +78,19 @@ export class ProductController implements CrudController<Product> {
 
   /**
    * Recover deleted User
-   * @param req 
+   * @param req
    */
-   @Permissions(Permission.UserRecoverOne)
-   @ApiOperation({
-     summary: "Recover deleted Product",
-   })
-   @ApiParam({
-     name: 'id',
-     type: Number
-   })
-   @Get('recover/:id')
-   @UseInterceptors(CrudRequestInterceptor)
-   public recoverOne(@ParsedRequest() req: CrudRequest): Promise<void | Product> {
-     return this.service.recoverOne(req);
-   }
+  @Permissions(Permission.UserRecoverOne)
+  @ApiOperation({
+    summary: "Recover deleted Product",
+  })
+  @ApiParam({
+    name: 'id',
+    type: Number
+  })
+  @Get('recover/:id')
+  @UseInterceptors(CrudRequestInterceptor)
+  public recoverOne(@ParsedRequest() req: CrudRequest): Promise<void | Product> {
+    return this.service.recoverOne(req);
+  }
 }

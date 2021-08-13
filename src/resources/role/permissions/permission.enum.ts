@@ -19,7 +19,7 @@ export enum Permission {
   UserSuspendOne = "User:Suspend-One",
 
   // Role
-  AdminRole = "User:*",
+  AdminRole = "Role:*",
   RoleReadAll = "Role:Read-All",
   RoleReadOne = "Role:Read-One",
   RoleCreateOne = "Role:Create-One",
