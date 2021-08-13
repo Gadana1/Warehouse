@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Test App
+# npm test
+
+# Perform Lint checks on staged files
+npx lint-staged

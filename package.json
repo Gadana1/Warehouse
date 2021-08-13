@@ -24,7 +24,7 @@
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "typeorm:create": "npm run typeorm migration:create -- -n",
     "typeorm:run": "npm run typeorm migration:run",
-    "postinstall": "husky install"
+    "postinstall": "husky install && husky add .husky/pre-commit \"npx lint-staged\""
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
@@ -104,11 +104,11 @@
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "npm run lint",
-      "git add"
+      "git add ."
     ],
     "src/**/*.{ts,tsx}": [
       "npm run lint:ts",
-      "git add"
+      "git add ."
     ]
   },
   "husky": {
