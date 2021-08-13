@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { Role } from "../../role/entities/role.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import * as bcrypt from 'bcrypt';
 
 @Entity({
   name: 'user'
@@ -15,18 +16,18 @@ export class User {
   @ApiProperty()
   name: String;
 
-  @Column({ type: 'varchar', length: 100, unique: true, nullable: false})
+  @Column({ type: 'varchar', length: 100, unique: true, nullable: false })
   @ApiProperty()
   email: String;
 
   @Column({ type: 'varchar', length: 256, default: null })
   password: String;
 
-  @Column({ type: 'boolean', default: false})
+  @Column({ type: 'boolean', default: false })
   @ApiProperty()
   active: Boolean;
 
-  @Column({ type: 'datetime', default: null})
+  @Column({ type: 'datetime', default: null })
   @ApiProperty()
   suspendedAt: Date;
 
@@ -43,11 +44,19 @@ export class User {
   deletedAt: Date;
 
   @ManyToMany(() => Role, role => role.users, { eager: true })
-  // Only add for owner entity - for many to many relationshp
-  @JoinTable({
+  @JoinTable({ // Only add for owner entity - for many to many relationshp
     name: 'user_roles',
-    joinColumn: { name: 'userId', referencedColumnName: 'id'},
-    inverseJoinColumn: { name: 'roleId', referencedColumnName: 'id'},
-  }) 
+    joinColumn: { name: 'userId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'roleId', referencedColumnName: 'id' },
+  })
   roles: Role[];
+
+  // Hooks
+  @BeforeInsert()
+  @BeforeUpdate()
+  async hashPassword() {
+    const salt = bcrypt.genSaltSync(10);
+    this.password = bcrypt.hashSync(String(this.password), salt);
+  }
+
 }

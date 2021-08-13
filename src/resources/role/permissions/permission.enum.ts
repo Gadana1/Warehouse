@@ -5,7 +5,6 @@ export enum Permission {
 
   // User
   AdminUser = "User:*",
-  UserInfo = "User:Info",
   UserReadAll = "User:Read-All",
   UserReadOne = "User:Read-One",
   UserCreateOne = "User:Create-One",

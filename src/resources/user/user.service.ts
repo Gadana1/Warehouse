@@ -32,31 +32,15 @@ export class UserService extends TypeOrmCrudService<User> {
    * @returns {Promise<User>}
    */
   async create(dto: CreateUserDto): Promise<User> {
-    // Hash Password
-    if (dto.password) {
-      const salt = bcrypt.genSaltSync(10);
-      dto.password = bcrypt.hashSync(String(dto.password), salt);
-    }
-    return this.repo.save(dto);
-  }
-
-  /**
-   * Update User
-   * @param {Number} id 
-   * @param {CreateUserDto} dto 
-   * @returns {Promise<User>}
-   */
-  async update(id: Number, dto: UpdateUserDto): Promise<User> {
-    const user = await this.findOne(+id);
-    if (user) {
-      // Hash Password
-      if (dto.password) {
-        const salt = bcrypt.genSaltSync(10);
-        dto.password = bcrypt.hashSync(String(dto.password), salt);
+    // Validate Role
+    if(dto.roles){
+      for (const role of dto.roles) {
+        if(!(await this.roleService.findOne(Number(role.id)))){
+          throw new NotFoundException(`Failed to find role with id ${role.id}`)
+        }
       }
-      return this.repo.save(dto);
     }
-    return null;
+    return this.repo.save(this.repo.create(dto));
   }
 
   /**
@@ -67,11 +51,6 @@ export class UserService extends TypeOrmCrudService<User> {
    * @returns {Promise<User>}
    */
   async createOne(req: CrudRequest, dto: DeepPartial<User>): Promise<User> {
-    // Hash Password
-    if (dto.password) {
-      const salt = bcrypt.genSaltSync(10);
-      dto.password = bcrypt.hashSync(String(dto.password), salt);
-    }
     // Validate Role
     if(dto.roles){
       for (const role of dto.roles) {
@@ -92,32 +71,19 @@ export class UserService extends TypeOrmCrudService<User> {
    */
   async createMany(req: CrudRequest, dto: CreateManyDto<User>): Promise<User[]> {
     if (dto.bulk) {
-      dto.bulk = dto.bulk.map((item) => {
-        // Hash Password
-        if (item.password) {
-          const salt = bcrypt.genSaltSync(10);
-          item.password = bcrypt.hashSync(String(item.password), salt);
+      dto.bulk =  await Promise.all(dto.bulk.map(async (item) => {
+        // Validate Role
+        if(item.roles){
+          for (const role of item.roles) {
+            if(!(await this.roleService.findOne(Number(role.id)))){
+              throw new NotFoundException(`Failed to find role with id ${role.id}`)
+            }
+          }
         }
         return item;
-      })
+      }));
     }
     return super.createMany(req, dto);
-  }
-
-  /**
-   * Update One record
-   * @override
-   * @param {CrudRequest} req 
-   * @param {DeepPartial<User>} dto 
-   * @returns {Promise<User>}
-   */
-  async updateOne(req: CrudRequest, dto: DeepPartial<User>): Promise<User> {
-    // Hash Password
-    if (dto.password) {
-      const salt = bcrypt.genSaltSync(10);
-      dto.password = bcrypt.hashSync(String(dto.password), salt);
-    }
-    return super.updateOne(req, dto);
   }
 
   /**

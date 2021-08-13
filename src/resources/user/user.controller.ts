@@ -96,7 +96,6 @@ export class UserController implements CrudController<User> {
    * @param req 
    * @param dto 
    */
-  @Permissions(Permission.UserInfo)
   @ApiOperation({
     summary: "Get current user info",
   })
