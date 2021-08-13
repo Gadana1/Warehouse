@@ -23,7 +23,8 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/configs/typeorm.ts",
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "typeorm:create": "npm run typeorm migration:create -- -n",
-    "typeorm:run": "npm run typeorm migration:run"
+    "typeorm:run": "npm run typeorm migration:run",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@nestjs/common": "^8.0.0",
