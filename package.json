@@ -15,6 +15,7 @@
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "lint:ts": "tslint --project tsconfig.json --config tslint.json",
+    "pretty" : "prettier --write --ignore-unknown",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -103,6 +104,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run pretty",
       "npm run lint",
       "git add ."
     ],
