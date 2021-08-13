@@ -1,43 +1,50 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { WarehouseProduct } from "../../warehouse-product/entities/warehouse-product.entity";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { WarehouseProduct } from '../../warehouse-product/entities/warehouse-product.entity';
 
 @Entity({
-  name: 'warehouse'
+  name: 'warehouse',
 })
 export class Warehouse {
-
   @PrimaryGeneratedColumn()
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @Column({ type: 'varchar', length: 100 })
   @ApiProperty()
-  name: String;
+  name: string;
 
-  @Column({ type: 'text', nullable: true})
+  @Column({ type: 'text', nullable: true })
   @ApiProperty()
-  address: String;
-
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  @ApiProperty()
-  city: String;
+  address: string;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
   @ApiProperty()
-  province: String;
+  city: string;
 
   @Column({ type: 'varchar', length: 100, nullable: true })
   @ApiProperty()
-  country: String;
+  province: string;
+
+  @Column({ type: 'varchar', length: 100, nullable: true })
+  @ApiProperty()
+  country: string;
 
   @Column({ type: 'varchar', length: 10, nullable: true })
   @ApiProperty()
-  countryCode: String;
+  countryCode: string;
 
   @Column({ type: 'varchar', length: 10, nullable: true })
   @ApiProperty()
-  postCode: String;
+  postCode: string;
 
   @CreateDateColumn()
   @ApiProperty()
@@ -51,12 +58,12 @@ export class Warehouse {
   @ApiProperty()
   deletedAt: Date;
 
-  @OneToMany(() => WarehouseProduct, wp => wp.product)
+  @OneToMany(() => WarehouseProduct, (wp) => wp.product)
   warehouseProducts: WarehouseProduct[];
 
   @ApiProperty({ required: false })
-  products?: Number;
-  
+  products?: number;
+
   @ApiProperty({ required: false })
-  productsAvailable?: Number;
+  productsAvailable?: number;
 }

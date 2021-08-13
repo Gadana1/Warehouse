@@ -1,28 +1,26 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
-import { IsBoolean, IsDateString, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsDateString, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjsx/crud/lib/crud';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
-  
   @IsString()
   @IsOptional()
   @ApiProperty()
-  name: String;
-  
+  name: string;
+
   @IsString()
   @IsOptional()
   @ApiProperty()
-  password: String;
+  password: string;
 
   @IsBoolean()
   @IsOptional()
   @ApiProperty()
-  active: Boolean;
+  active: boolean;
 
   @IsDateString()
   @IsOptional()
   @ApiProperty()
   suspendedAt: Date;
-
 }

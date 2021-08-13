@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CrudRequest } from '@nestjsx/crud';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
@@ -9,11 +14,14 @@ import { WarehouseProduct } from './entities/warehouse-product.entity';
 
 @Injectable()
 export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct> {
-
-  constructor(@InjectRepository(WarehouseProduct) repo: Repository<WarehouseProduct>,
+  constructor(
+    @InjectRepository(WarehouseProduct) repo: Repository<WarehouseProduct>,
     // Inject forward ref of service to handle circular dependencies
-    @Inject(forwardRef(() => WarehouseService)) private warehouseService: WarehouseService,
-    @Inject(forwardRef(() => ProductService)) private productService: ProductService) {
+    @Inject(forwardRef(() => WarehouseService))
+    private warehouseService: WarehouseService,
+    @Inject(forwardRef(() => ProductService))
+    private productService: ProductService,
+  ) {
     super(repo);
   }
 
@@ -23,11 +31,15 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
    * @param onlyAvailable
    * @returns {Promise<Number>}
    */
-  async getCountForProduct(productId: Number, onlyAvailable = false): Promise<number> {
-    return onlyAvailable ? 
-            this.repo.count({ where: { product: { id: productId } } }) :
-            this.repo.count({ where: { product: { id: productId, active: true, deletedAt: null } } });
-
+  async getCountForProduct(
+    productId: number,
+    onlyAvailable = false,
+  ): Promise<number> {
+    return onlyAvailable
+      ? this.repo.count({ where: { product: { id: productId } } })
+      : this.repo.count({
+          where: { product: { id: productId, active: true, deletedAt: null } },
+        });
   }
 
   /**
@@ -36,10 +48,15 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
    * @param onlyAvailable
    * @returns {Promise<Number>}
    */
-   async getCountForWarehouse(warehouseId: Number, onlyAvailable = false): Promise<number> {
-    return onlyAvailable ? 
-            this.repo.count({ where: { warehouse: { id: warehouseId } } }) :
-            this.repo.count({ where: { warehouse: { id: warehouseId, deletedAt: null } } });
+  async getCountForWarehouse(
+    warehouseId: number,
+    onlyAvailable = false,
+  ): Promise<number> {
+    return onlyAvailable
+      ? this.repo.count({ where: { warehouse: { id: warehouseId } } })
+      : this.repo.count({
+          where: { warehouse: { id: warehouseId, deletedAt: null } },
+        });
   }
 
   /**
@@ -49,17 +66,24 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
    * @param {DeepPartial<WarehouseProduct>} dto
    * @returns {Promise<WarehouseProduct>}
    */
-  async createOne(req: CrudRequest, dto: DeepPartial<WarehouseProduct>): Promise<WarehouseProduct> {
+  async createOne(
+    req: CrudRequest,
+    dto: DeepPartial<WarehouseProduct>,
+  ): Promise<WarehouseProduct> {
     // Validate Warehouse
     if (dto.warehouse) {
       if (!(await this.warehouseService.findOne(Number(dto.warehouse.id)))) {
-        throw new NotFoundException(`Failed to find warehouse with id ${dto.warehouse.id}`)
+        throw new NotFoundException(
+          `Failed to find warehouse with id ${dto.warehouse.id}`,
+        );
       }
     }
     // Validate Product
     if (dto.product) {
       if (!(await this.productService.findOne(Number(dto.product.id)))) {
-        throw new NotFoundException(`Failed to find product with id ${dto.product.id}`)
+        throw new NotFoundException(
+          `Failed to find product with id ${dto.product.id}`,
+        );
       }
     }
     return super.createOne(req, dto);

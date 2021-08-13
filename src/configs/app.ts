@@ -1,9 +1,13 @@
 export const AppConfig = {
   // Define Environment
   env: process.env.NODE_ENV || process.env.ENV,
-  isLocal: (process.env.NODE_ENV || process.env.ENV) === "local",
-  isDevelopment: (process.env.NODE_ENV || process.env.ENV) === "development" || (process.env.NODE_ENV || process.env.ENV) === "dev",
-  isProduction: (process.env.NODE_ENV || process.env.ENV) === "production" ||  (process.env.NODE_ENV || process.env.ENV) === "prod",
+  isLocal: (process.env.NODE_ENV || process.env.ENV) === 'local',
+  isDevelopment:
+    (process.env.NODE_ENV || process.env.ENV) === 'development' ||
+    (process.env.NODE_ENV || process.env.ENV) === 'dev',
+  isProduction:
+    (process.env.NODE_ENV || process.env.ENV) === 'production' ||
+    (process.env.NODE_ENV || process.env.ENV) === 'prod',
 
   // JWT
   jwtSecretKey: process.env.JWT_SECRET_KEY,
@@ -11,5 +15,5 @@ export const AppConfig = {
 
   // Throttle - Request Limit
   throttleTTL: process.env.THROTTLE_TTL || 60,
-  throttleLimit: process.env.THROTTLE_LIMIT || 60
-}
+  throttleLimit: process.env.THROTTLE_LIMIT || 60,
+};

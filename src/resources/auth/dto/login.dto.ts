@@ -1,15 +1,13 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsEmail, IsString } from "class-validator";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import { IsEmail, IsString } from 'class-validator';
 
 export class LoginDto {
-  
   @IsString()
   @ApiProperty()
   @IsEmail()
-  email: String;
-  
+  email: string;
+
   @IsString()
   @ApiProperty()
-  password: String;
-  
+  password: string;
 }

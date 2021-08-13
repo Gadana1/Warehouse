@@ -2,13 +2,24 @@ import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { Crud, CrudController, CrudRequest, CrudRequestInterceptor, ParsedRequest } from '@nestjsx/crud';
+import {
+  Crud,
+  CrudController,
+  CrudRequest,
+  CrudRequestInterceptor,
+  ParsedRequest,
+} from '@nestjsx/crud';
 import { Product } from './entities/product.entity';
 import { Permissions } from '../role/permissions/permissions.decorator';
 import { Permission } from '../role/permissions/permission.enum';
-import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 
-// Use crud library to 
+// Use crud library to
 // Generates basic CRUD operations
 @Crud({
   // Define Model to use for CRUD
@@ -18,59 +29,41 @@ import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger'
   // Add decorators to CRUD routes
   routes: {
     createManyBase: {
-      decorators: [
-        Permissions(Permission.ProductCreateMany)
-      ]
+      decorators: [Permissions(Permission.ProductCreateMany)],
     },
     createOneBase: {
-      decorators: [
-        Permissions(Permission.ProductCreateOne)
-      ]
+      decorators: [Permissions(Permission.ProductCreateOne)],
     },
     updateOneBase: {
-      decorators: [
-        Permissions(Permission.ProductUpdateOne)
-      ]
+      decorators: [Permissions(Permission.ProductUpdateOne)],
     },
     replaceOneBase: {
-      decorators: [
-        Permissions(Permission.ProductReplaceOne)
-      ]
+      decorators: [Permissions(Permission.ProductReplaceOne)],
     },
     deleteOneBase: {
-      decorators: [
-        Permissions(Permission.ProductDeleteOne)
-      ]
+      decorators: [Permissions(Permission.ProductDeleteOne)],
     },
     recoverOneBase: {
-      decorators: [
-        Permissions(Permission.ProductRecoverOne)
-      ]
+      decorators: [Permissions(Permission.ProductRecoverOne)],
     },
     getManyBase: {
-      decorators: [
-        Permissions(Permission.ProductReadAll)
-      ]
+      decorators: [Permissions(Permission.ProductReadAll)],
     },
     getOneBase: {
-      decorators: [
-        Permissions(Permission.ProductReadOne)
-      ]
-    }
+      decorators: [Permissions(Permission.ProductReadOne)],
+    },
   },
   // Override DTOs
   dto: {
     create: CreateProductDto,
     update: UpdateProductDto,
-  }
+  },
 })
-
 @ApiBearerAuth()
 @ApiTags('Product')
 @Controller('api/product')
 export class ProductController implements CrudController<Product> {
-
-  constructor(public service: ProductService) { }
+  constructor(public service: ProductService) {}
 
   get base(): CrudController<Product> {
     return this;
@@ -82,15 +75,17 @@ export class ProductController implements CrudController<Product> {
    */
   @Permissions(Permission.UserRecoverOne)
   @ApiOperation({
-    summary: "Recover deleted Product",
+    summary: 'Recover deleted Product',
   })
   @ApiParam({
     name: 'id',
-    type: Number
+    type: Number,
   })
   @Get('recover/:id')
   @UseInterceptors(CrudRequestInterceptor)
-  public recoverOne(@ParsedRequest() req: CrudRequest): Promise<void | Product> {
+  public recoverOne(
+    @ParsedRequest() req: CrudRequest,
+  ): Promise<void | Product> {
     return this.service.recoverOne(req);
   }
 }

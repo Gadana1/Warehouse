@@ -9,11 +9,11 @@ import { WarehouseProductModule } from '../warehouse-product/warehouse-product.m
   imports: [
     // Forward ref of modules to hande circular dependencies
     forwardRef(() => WarehouseProductModule),
-    TypeOrmModule.forFeature([Warehouse])
+    TypeOrmModule.forFeature([Warehouse]),
   ],
   controllers: [WarehouseController],
   providers: [WarehouseService],
   // Export service to be used in other modules that imports this module
-  exports: [WarehouseService]
+  exports: [WarehouseService],
 })
 export class WarehouseModule {}

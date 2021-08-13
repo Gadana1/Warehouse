@@ -21,20 +21,27 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(username: string, password: string): Promise<any> {
     const user = await this.authService.validateUser(username, password);
     if (user) {
-
       // Check if active
       if (user && !user.active) {
-        throw new UnauthorizedException("This user account is still pending verification. Please wait or contact administrator")
+        throw new UnauthorizedException(
+          'This user account is still pending verification. Please wait or contact administrator',
+        );
       }
 
       // Check if suspended
-      if (user && user.suspendedAt && user.suspendedAt.getTime() <= (new Date()).getTime()) {
-        throw new UnauthorizedException("This user account has been suspended or rejected. Please contact administrator")
+      if (
+        user &&
+        user.suspendedAt &&
+        user.suspendedAt.getTime() <= new Date().getTime()
+      ) {
+        throw new UnauthorizedException(
+          'This user account has been suspended or rejected. Please contact administrator',
+        );
       }
 
       return user;
     }
-    
+
     throw new UnauthorizedException();
   }
 }

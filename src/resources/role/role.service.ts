@@ -27,9 +27,8 @@ export class RoleService extends TypeOrmCrudService<Role> {
    * @returns {String[]}
    */
   getPermissions(): Permission[] {
-    return Object.values(Permission)
+    return Object.values(Permission);
   }
-
 
   /**
    * Update One record
@@ -38,13 +37,16 @@ export class RoleService extends TypeOrmCrudService<Role> {
    * @param {DeepPartial<Role>} dto
    * @returns {Promise<User>}
    */
-   async updateOne(req: CrudRequest, dto: DeepPartial<Role>): Promise<Role> {
-    const role = await this.getOneOrFail(req)
+  async updateOne(req: CrudRequest, dto: DeepPartial<Role>): Promise<Role> {
+    const role = await this.getOneOrFail(req);
     if (role && dto.permissions) {
       // Add permission if not exist
-      let permissions = [];
+      const permissions = [];
       for (const permission of dto.permissions) {
-        if (!role.permissions || !role.permissions.find(item => item === permission)) {
+        if (
+          !role.permissions ||
+          !role.permissions.find((item) => item === permission)
+        ) {
           permissions.push(permission);
         }
       }
@@ -59,10 +61,10 @@ export class RoleService extends TypeOrmCrudService<Role> {
    * @param {CrudRequest} req
    * @returns {Promise<Role>}
    */
-   async deleteOne(req: CrudRequest): Promise<Role> {
+  async deleteOne(req: CrudRequest): Promise<Role> {
     return this.repo.softRemove(await this.getOneOrFail(req));
   }
-  
+
   /**
    * Add Permission
    * @override
@@ -70,12 +72,12 @@ export class RoleService extends TypeOrmCrudService<Role> {
    * @param {Permission} permission
    * @returns {Promise<Role>}
    */
-   async addPermission(req: CrudRequest, permission: Permission): Promise<Role> {
-    const role = await this.getOneOrFail(req)
+  async addPermission(req: CrudRequest, permission: Permission): Promise<Role> {
+    const role = await this.getOneOrFail(req);
     if (role && permission) {
       // Add permission if not exist
       role.permissions = role.permissions || [];
-      if (!role.permissions.find(item => item === permission)) {
+      if (!role.permissions.find((perm) => perm === permission)) {
         role.permissions.push(permission);
       }
       return this.repo.save(role);
@@ -89,13 +91,15 @@ export class RoleService extends TypeOrmCrudService<Role> {
    * @param {Permission} permission
    * @returns {Promise<Role>}
    */
-   async removePermission(req: CrudRequest, permission: Permission): Promise<Role> {
-    const role = await this.getOneOrFail(req)
+  async removePermission(
+    req: CrudRequest,
+    permission: Permission,
+  ): Promise<Role> {
+    const role = await this.getOneOrFail(req);
     if (role && permission) {
-      role.permissions = role.permissions.filter(role => role !== permission)
+      role.permissions = role.permissions.filter((perm) => perm !== permission);
       return this.repo.save(role);
     }
     return null;
   }
-
 }

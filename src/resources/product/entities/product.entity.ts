@@ -1,27 +1,34 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { WarehouseProduct } from "../../warehouse-product/entities/warehouse-product.entity";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { WarehouseProduct } from '../../warehouse-product/entities/warehouse-product.entity';
 
 @Entity({
-  name: 'product'
+  name: 'product',
 })
 export class Product {
-
   @PrimaryGeneratedColumn()
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @Column({ type: 'varchar', length: 100 })
   @ApiProperty()
-  name: String;
+  name: string;
 
-  @Column({ type: 'text', nullable: true})
+  @Column({ type: 'text', nullable: true })
   @ApiProperty()
-  description: String;
+  description: string;
 
-  @Column({ type: 'boolean', default: false})
+  @Column({ type: 'boolean', default: false })
   @ApiProperty()
-  active: Boolean;
+  active: boolean;
 
   @CreateDateColumn()
   @ApiProperty()
@@ -35,12 +42,12 @@ export class Product {
   @ApiProperty()
   deletedAt: Date;
 
-  @OneToMany(() => WarehouseProduct, wp => wp.product)
+  @OneToMany(() => WarehouseProduct, (wp) => wp.product)
   warehouseProducts: WarehouseProduct[];
 
   @ApiProperty({ required: false })
-  stock?: Number;
-  
+  stock?: number;
+
   @ApiProperty({ required: false })
-  stockAvailable?: Number;
+  stockAvailable?: number;
 }

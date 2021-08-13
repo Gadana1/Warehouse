@@ -9,10 +9,10 @@ export class PermissionGuard implements CanActivate {
   constructor(private reflector?: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
-    const requiredPermissions = this.reflector.getAllAndOverride<Permission[]>(PERMISSIONS_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
+    const requiredPermissions = this.reflector.getAllAndOverride<Permission[]>(
+      PERMISSIONS_KEY,
+      [context.getHandler(), context.getClass()],
+    );
 
     if (!requiredPermissions) {
       return true;
@@ -20,12 +20,18 @@ export class PermissionGuard implements CanActivate {
 
     // Check is user has any of the required permissions
     const user: User = context.switchToHttp().getRequest()?.user;
-    if(user) {
-        return requiredPermissions.some((reqPermission) => {
-            return user.roles?.some((role) => {
-                return role.permissions?.includes(Permission.Admin) || role.permissions?.includes(reqPermission) || role.permissions?.some((permission) => this.checkWildCard(reqPermission, permission));
-            })
+    if (user) {
+      return requiredPermissions.some((reqPermission) => {
+        return user.roles?.some((role) => {
+          return (
+            role.permissions?.includes(Permission.Admin) ||
+            role.permissions?.includes(reqPermission) ||
+            role.permissions?.some((permission) =>
+              this.checkWildCard(reqPermission, permission),
+            )
+          );
         });
+      });
     }
     return false;
   }
@@ -34,11 +40,19 @@ export class PermissionGuard implements CanActivate {
    * Check if wild card permission matches
    * @param required
    * @param current
-   * @returns 
+   * @returns
    */
-  checkWildCard(required: string, current: string){
+  checkWildCard(required: string, current: string) {
     const [reqFeature, reqAccess] = required.split(':');
     const [curFeature, curAccess] = current.split(':');
-    return (reqFeature && curFeature && reqAccess && curAccess) && ((reqFeature === curFeature && (reqAccess === curAccess || curAccess === "*")) || (curFeature === "*" && curAccess === "*"))
+    return (
+      reqFeature &&
+      curFeature &&
+      reqAccess &&
+      curAccess &&
+      ((reqFeature === curFeature &&
+        (reqAccess === curAccess || curAccess === '*')) ||
+        (curFeature === '*' && curAccess === '*'))
+    );
   }
 }

@@ -1,9 +1,8 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsArray, IsString } from "class-validator";
-import { Permission } from "../permissions/permission.enum";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import { IsArray, IsString } from 'class-validator';
+import { Permission } from '../permissions/permission.enum';
 
 export class CreateRoleDto {
-
   @IsString()
   @ApiProperty()
   name: string;
@@ -11,5 +10,4 @@ export class CreateRoleDto {
   @IsArray()
   @ApiProperty()
   permissions: Permission[];
-
 }

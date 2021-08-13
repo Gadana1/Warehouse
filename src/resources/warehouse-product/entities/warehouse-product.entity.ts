@@ -1,38 +1,53 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { Product } from "../../product/entities/product.entity";
-import { Warehouse } from "../../warehouse/entities/warehouse.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import { Product } from '../../product/entities/product.entity';
+import { Warehouse } from '../../warehouse/entities/warehouse.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity({
-  name: 'warehouse_products'
+  name: 'warehouse_products',
 })
 export class WarehouseProduct {
-
   @PrimaryGeneratedColumn()
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @ApiProperty({
-    type: () => Warehouse
+    type: () => Warehouse,
   })
-  @ManyToOne(() => Warehouse, warehouse => warehouse.warehouseProducts)
+  @ManyToOne(() => Warehouse, (warehouse) => warehouse.warehouseProducts)
   warehouse: Warehouse;
 
   @ApiProperty({
-    type: () => Product
+    type: () => Product,
   })
-  @ManyToOne(() => Product, product => product.warehouseProducts)
+  @ManyToOne(() => Product, (product) => product.warehouseProducts)
   product: Product;
 
   @Column({ type: 'varchar', length: 100 })
   @ApiProperty()
-  barcode: String;
+  barcode: string;
 
-  @Column({ type: 'datetime', default: null, comment: "Manufactured date of product" })
+  @Column({
+    type: 'datetime',
+    default: null,
+    comment: 'Manufactured date of product',
+  })
   @ApiProperty()
   mfgAt: Date;
 
-  @Column({ type: 'datetime', default: null, comment: "Expiry date of product" })
+  @Column({
+    type: 'datetime',
+    default: null,
+    comment: 'Expiry date of product',
+  })
   @ApiProperty()
   expAt: Date;
 
@@ -47,5 +62,4 @@ export class WarehouseProduct {
   @DeleteDateColumn({ default: null })
   @ApiProperty()
   deletedAt: Date;
-  
 }

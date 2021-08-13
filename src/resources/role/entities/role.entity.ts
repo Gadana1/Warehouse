@@ -1,20 +1,27 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { User } from "../../user/entities/user.entity";
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Permission } from "../permissions/permission.enum";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import { User } from '../../user/entities/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Permission } from '../permissions/permission.enum';
 
 @Entity({
-  name: 'role'
+  name: 'role',
 })
 export class Role {
-
   @PrimaryGeneratedColumn()
   @ApiProperty()
-  id: Number;
+  id: number;
 
   @Column({ type: 'varchar', length: 100 })
   @ApiProperty()
-  name: String;
+  name: string;
 
   @CreateDateColumn()
   @ApiProperty()
@@ -32,6 +39,6 @@ export class Role {
   @Column({ type: 'json' })
   permissions: Permission[];
 
-  @ManyToMany(() => User, user => user.roles)
+  @ManyToMany(() => User, (user) => user.roles)
   users: User[];
 }

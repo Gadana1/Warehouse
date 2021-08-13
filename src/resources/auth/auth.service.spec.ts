@@ -31,7 +31,6 @@ describe('AuthService', () => {
     expect(service).toBeDefined();
   });
 
-
   it('should have accss_token', () => {
     expect(service.login({ id: 1 })).toMatchObject({ access_token: '' });
   });

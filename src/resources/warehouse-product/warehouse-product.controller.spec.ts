@@ -11,7 +11,9 @@ describe('WarehouseProductController', () => {
       providers: [WarehouseProductService],
     }).compile();
 
-    controller = module.get<WarehouseProductController>(WarehouseProductController);
+    controller = module.get<WarehouseProductController>(
+      WarehouseProductController,
+    );
   });
 
   it('should be defined', () => {

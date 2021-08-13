@@ -3,17 +3,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { CreateManyDto, CrudRequest } from '@nestjsx/crud';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { DeepPartial, Repository } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 
 import { User } from './entities/user.entity';
 import { RoleService } from '../role/role.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService extends TypeOrmCrudService<User> {
-
-  constructor(@InjectRepository(User) repo: Repository<User>, private roleService: RoleService) {
+  constructor(
+    @InjectRepository(User) repo: Repository<User>,
+    private roleService: RoleService,
+  ) {
     super(repo);
   }
 
@@ -33,10 +33,10 @@ export class UserService extends TypeOrmCrudService<User> {
    */
   async create(dto: CreateUserDto): Promise<User> {
     // Validate Role
-    if(dto.roles){
+    if (dto.roles) {
       for (const role of dto.roles) {
-        if(!(await this.roleService.findOne(Number(role.id)))){
-          throw new NotFoundException(`Failed to find role with id ${role.id}`)
+        if (!(await this.roleService.findOne(Number(role.id)))) {
+          throw new NotFoundException(`Failed to find role with id ${role.id}`);
         }
       }
     }
@@ -52,10 +52,10 @@ export class UserService extends TypeOrmCrudService<User> {
    */
   async createOne(req: CrudRequest, dto: DeepPartial<User>): Promise<User> {
     // Validate Role
-    if(dto.roles){
+    if (dto.roles) {
       for (const role of dto.roles) {
-        if(!(await this.roleService.findOne(Number(role.id)))){
-          throw new NotFoundException(`Failed to find role with id ${role.id}`)
+        if (!(await this.roleService.findOne(Number(role.id)))) {
+          throw new NotFoundException(`Failed to find role with id ${role.id}`);
         }
       }
     }
@@ -69,19 +69,26 @@ export class UserService extends TypeOrmCrudService<User> {
    * @param {CreateManyDto} dto
    * @returns {Promise<User>}
    */
-  async createMany(req: CrudRequest, dto: CreateManyDto<User>): Promise<User[]> {
+  async createMany(
+    req: CrudRequest,
+    dto: CreateManyDto<User>,
+  ): Promise<User[]> {
     if (dto.bulk) {
-      dto.bulk =  await Promise.all(dto.bulk.map(async (item) => {
-        // Validate Role
-        if(item.roles){
-          for (const role of item.roles) {
-            if(!(await this.roleService.findOne(Number(role.id)))){
-              throw new NotFoundException(`Failed to find role with id ${role.id}`)
+      dto.bulk = await Promise.all(
+        dto.bulk.map(async (item) => {
+          // Validate Role
+          if (item.roles) {
+            for (const role of item.roles) {
+              if (!(await this.roleService.findOne(Number(role.id)))) {
+                throw new NotFoundException(
+                  `Failed to find role with id ${role.id}`,
+                );
+              }
             }
           }
-        }
-        return item;
-      }));
+          return item;
+        }),
+      );
     }
     return super.createMany(req, dto);
   }
@@ -103,13 +110,13 @@ export class UserService extends TypeOrmCrudService<User> {
    * @param {Number} roleId
    * @returns {Promise<User>}
    */
-   async addRole(req: CrudRequest, roleId: Number): Promise<User> {
-    const user = await this.getOneOrFail(req)
+  async addRole(req: CrudRequest, roleId: number): Promise<User> {
+    const user = await this.getOneOrFail(req);
     if (user && roleId) {
       // Add role if not exist
       user.roles = user.roles || [];
-      if (!user.roles.find(role => role.id === roleId)) {
-        user.roles.push((await this.roleService.findOne(Number(roleId))));
+      if (!user.roles.find((role) => role.id === roleId)) {
+        user.roles.push(await this.roleService.findOne(Number(roleId)));
       }
       return this.repo.save(user);
     }
@@ -123,10 +130,10 @@ export class UserService extends TypeOrmCrudService<User> {
    * @param {Number} roleId
    * @returns {Promise<User>}
    */
-  async removeRole(req: CrudRequest, roleId: Number): Promise<User> {
-    const user = await this.getOneOrFail(req)
+  async removeRole(req: CrudRequest, roleId: number): Promise<User> {
+    const user = await this.getOneOrFail(req);
     if (user && user.roles && roleId) {
-      user.roles = user.roles.filter(role => role.id !== roleId)
+      user.roles = user.roles.filter((role) => role.id !== roleId);
       return this.repo.save(user);
     }
     return null;
@@ -138,15 +145,15 @@ export class UserService extends TypeOrmCrudService<User> {
    * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
-   async activate(req: CrudRequest): Promise<User> {
-    const user = await this.getOneOrFail(req)
+  async activate(req: CrudRequest): Promise<User> {
+    const user = await this.getOneOrFail(req);
     if (user) {
       user.suspendedAt = null;
       user.active = true;
-      if(!user.roles || user.roles.length === 0){
+      if (!user.roles || user.roles.length === 0) {
         user.roles = [
-          await this.roleService.findOne({ where: { name: "User" } })
-        ]
+          await this.roleService.findOne({ where: { name: 'User' } }),
+        ];
       }
       return this.save(user);
     }
@@ -159,13 +166,12 @@ export class UserService extends TypeOrmCrudService<User> {
    * @param {CrudRequest} req
    * @returns {Promise<User>}
    */
-   async suspend(req: CrudRequest): Promise<User> {
-    const user = await this.getOneOrFail(req)
+  async suspend(req: CrudRequest): Promise<User> {
+    const user = await this.getOneOrFail(req);
     if (user) {
       user.suspendedAt = new Date();
       return this.save(user);
     }
     throw new NotFoundException();
   }
-
 }

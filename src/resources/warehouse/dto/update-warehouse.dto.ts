@@ -1,43 +1,41 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateWarehouseDto } from './create-warehouse.dto';
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsOptional, IsString } from "class-validator";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import { IsOptional, IsString } from 'class-validator';
 
 export class UpdateWarehouseDto extends PartialType(CreateWarehouseDto) {
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  name: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  name: String;
-  
-  @IsString()
-  @IsOptional()
-  @ApiProperty()
-  address: String;
+  address: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  city: String;
-  
-  @IsString()
-  @IsOptional()
-  @ApiProperty()
-  province: String;
+  city: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  country: String;
-  
-  @IsString()
-  @IsOptional()
-  @ApiProperty()
-  countryCode: String;
+  province: string;
 
   @IsString()
   @IsOptional()
   @ApiProperty()
-  postCode: String;
+  country: string;
 
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  countryCode: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  postCode: string;
 }

@@ -1,26 +1,32 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsArray, IsBoolean, IsDateString, IsEmail, IsOptional, IsString } from "class-validator";
-import { Role } from "../../role/entities/role.entity";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import {
+  IsArray,
+  IsBoolean,
+  IsDateString,
+  IsEmail,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { Role } from '../../role/entities/role.entity';
 
 export class CreateUserDto {
-  
   @IsString()
   @ApiProperty()
-  name: String;
-  
+  name: string;
+
   @IsString()
   @ApiProperty()
   @IsEmail()
-  email: String;
-  
+  email: string;
+
   @IsString()
   @ApiProperty()
-  password: String;
+  password: string;
 
   @IsBoolean()
   @IsOptional()
   @ApiProperty()
-  active: Boolean;
+  active: boolean;
 
   @IsDateString()
   @IsOptional()
@@ -30,8 +36,7 @@ export class CreateUserDto {
   @IsArray()
   @IsOptional()
   @ApiProperty({
-    type: [Role]
+    type: [Role],
   })
   roles?: Role[];
-
 }

@@ -1,19 +1,17 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsBoolean, IsOptional, IsString } from "class-validator";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
 export class CreateProductDto {
+  @IsString()
+  @ApiProperty()
+  name: string;
 
   @IsString()
   @ApiProperty()
-  name: String;
-  
-  @IsString()
-  @ApiProperty()
-  description: String;
+  description: string;
 
   @IsBoolean()
   @IsOptional()
   @ApiProperty()
-  active: Boolean;
-
+  active: boolean;
 }

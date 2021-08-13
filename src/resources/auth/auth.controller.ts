@@ -11,7 +11,7 @@ import { RegisterDto } from './dto/register.dto';
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   /**
    * Login to get JWT access token
@@ -19,10 +19,10 @@ export class AuthController {
    */
   @Throttle(3, 60)
   @ApiOperation({
-    summary: "Login to get JWT access token",
+    summary: 'Login to get JWT access token',
   })
   @ApiBody({
-    type: LoginDto
+    type: LoginDto,
   })
   @Public()
   @UseGuards(LocalAuthGuard)
@@ -37,10 +37,10 @@ export class AuthController {
    */
   @Throttle(3, 60)
   @ApiOperation({
-    summary: "Register new user",
+    summary: 'Register new user',
   })
   @ApiBody({
-    type: RegisterDto
+    type: RegisterDto,
   })
   @Public()
   @Post('register')

@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   /**
    * Validate jwt payload - Called by passport JWT strategy flow
-   * 
+   *
    * @param payload
    * @returns {Promise<any>}
    */
@@ -26,17 +26,25 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
       // Check if active
       if (user && !user.active) {
-        throw new UnauthorizedException("This user account is still pending verification. Please wait or contact administrator")
+        throw new UnauthorizedException(
+          'This user account is still pending verification. Please wait or contact administrator',
+        );
       }
 
       // Check if suspended
-      if (user && user.suspendedAt && user.suspendedAt.getTime() <= (new Date()).getTime()) {
-        throw new UnauthorizedException("This user account has been suspended or rejected. Please contact administrator")
+      if (
+        user &&
+        user.suspendedAt &&
+        user.suspendedAt.getTime() <= new Date().getTime()
+      ) {
+        throw new UnauthorizedException(
+          'This user account has been suspended or rejected. Please contact administrator',
+        );
       }
 
       return user;
     }
-    
+
     throw new UnauthorizedException();
   }
 }

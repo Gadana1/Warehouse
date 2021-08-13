@@ -1,34 +1,32 @@
-import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsOptional, IsPostalCode, IsString } from "class-validator";
+import { ApiProperty } from '@nestjsx/crud/lib/crud';
+import { IsString } from 'class-validator';
 
 export class CreateWarehouseDto {
-  
   @IsString()
   @ApiProperty()
-  name: String;
-  
-  @IsString()
-  @ApiProperty()
-  address: String;
+  name: string;
 
   @IsString()
   @ApiProperty()
-  city: String;
-  
-  @IsString()
-  @ApiProperty()
-  province: String;
+  address: string;
 
   @IsString()
   @ApiProperty()
-  country: String;
-  
-  @IsString()
-  @ApiProperty()
-  countryCode: String;
+  city: string;
 
   @IsString()
   @ApiProperty()
-  postCode: String;
+  province: string;
 
+  @IsString()
+  @ApiProperty()
+  country: string;
+
+  @IsString()
+  @ApiProperty()
+  countryCode: string;
+
+  @IsString()
+  @ApiProperty()
+  postCode: string;
 }

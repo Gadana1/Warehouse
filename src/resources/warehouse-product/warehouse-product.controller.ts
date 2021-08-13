@@ -2,13 +2,24 @@ import { Controller, Get, UseInterceptors } from '@nestjs/common';
 import { WarehouseProductService } from './warehouse-product.service';
 import { CreateWarehouseProductDto } from './dto/create-warehouse-product.dto';
 import { UpdateWarehouseProductDto } from './dto/update-warehouse-product.dto';
-import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { WarehouseProduct } from './entities/warehouse-product.entity';
-import { Crud, CrudController, CrudRequest, CrudRequestInterceptor, ParsedRequest } from '@nestjsx/crud';
+import {
+  Crud,
+  CrudController,
+  CrudRequest,
+  CrudRequestInterceptor,
+  ParsedRequest,
+} from '@nestjsx/crud';
 import { Permissions } from '../role/permissions/permissions.decorator';
 import { Permission } from '../role/permissions/permission.enum';
 
-// Use crud library to 
+// Use crud library to
 // Generates basic CRUD operations
 @Crud({
   // Define Model to use for CRUD
@@ -18,44 +29,28 @@ import { Permission } from '../role/permissions/permission.enum';
   // Add decorators to CRUD routes
   routes: {
     createManyBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductCreateMany)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductCreateMany)],
     },
     createOneBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductCreateOne)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductCreateOne)],
     },
     updateOneBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductUpdateOne)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductUpdateOne)],
     },
     replaceOneBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductReplaceOne)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductReplaceOne)],
     },
     deleteOneBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductDeleteOne)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductDeleteOne)],
     },
     recoverOneBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductRecoverOne)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductRecoverOne)],
     },
     getManyBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductReadAll)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductReadAll)],
     },
     getOneBase: {
-      decorators: [
-        Permissions(Permission.WarehouseProductReadOne)
-      ]
+      decorators: [Permissions(Permission.WarehouseProductReadOne)],
     },
   },
   // Override DTOs
@@ -67,20 +62,20 @@ import { Permission } from '../role/permissions/permission.enum';
   query: {
     join: {
       product: {
-        eager: true
+        eager: true,
       },
       warehouse: {
-        eager: true
+        eager: true,
       },
     },
-  }
+  },
 })
-
 @ApiBearerAuth()
 @ApiTags('Warehouse Product')
 @Controller('api/warehouse-product')
-export class WarehouseProductController implements CrudController<WarehouseProduct> {
-  
+export class WarehouseProductController
+  implements CrudController<WarehouseProduct>
+{
   constructor(public service: WarehouseProductService) {}
 
   get base(): CrudController<WarehouseProduct> {
@@ -91,17 +86,19 @@ export class WarehouseProductController implements CrudController<WarehouseProdu
    * Recover deleted Warehouse Product
    * @param req
    */
-   @Permissions(Permission.UserRecoverOne)
-   @ApiOperation({
-     summary: "Recover deleted Warehouse Product",
-   })
-   @ApiParam({
-     name: 'id',
-     type: Number
-   })
-   @Get('recover/:id')
-   @UseInterceptors(CrudRequestInterceptor)
-   public recoverOne(@ParsedRequest() req: CrudRequest): Promise<void | WarehouseProduct> {
-     return this.service.recoverOne(req);
-   }
+  @Permissions(Permission.UserRecoverOne)
+  @ApiOperation({
+    summary: 'Recover deleted Warehouse Product',
+  })
+  @ApiParam({
+    name: 'id',
+    type: Number,
+  })
+  @Get('recover/:id')
+  @UseInterceptors(CrudRequestInterceptor)
+  public recoverOne(
+    @ParsedRequest() req: CrudRequest,
+  ): Promise<void | WarehouseProduct> {
+    return this.service.recoverOne(req);
+  }
 }

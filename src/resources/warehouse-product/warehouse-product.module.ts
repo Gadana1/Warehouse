@@ -16,6 +16,6 @@ import { ProductModule } from '../product/product.module';
   controllers: [WarehouseProductController],
   providers: [WarehouseProductService],
   // Export service to be used in other modules that imports this module
-  exports: [WarehouseProductService]
+  exports: [WarehouseProductService],
 })
 export class WarehouseProductModule {}

@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -31,7 +30,7 @@ import { OrmConfig } from './configs/typeorm';
       limit: +AppConfig.throttleLimit,
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: () => OrmConfig
+      useFactory: () => OrmConfig,
     }),
     UserModule,
     RoleModule,
@@ -43,7 +42,7 @@ import { OrmConfig } from './configs/typeorm';
   controllers: [AppController],
   providers: [
     AppService,
-    // Global JWT Authentication 
+    // Global JWT Authentication
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
@@ -56,8 +55,8 @@ import { OrmConfig } from './configs/typeorm';
     // Global Throttling
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard
-    }
+      useClass: ThrottlerGuard,
+    },
   ],
 })
-export class AppModule { }
+export class AppModule {}
