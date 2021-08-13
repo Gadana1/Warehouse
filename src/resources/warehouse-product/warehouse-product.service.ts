@@ -31,15 +31,11 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
    * @param onlyAvailable
    * @returns {Promise<Number>}
    */
-  async getCountForProduct(
-    productId: number,
-    onlyAvailable = false,
-  ): Promise<number> {
-    return onlyAvailable
-      ? this.repo.count({ where: { product: { id: productId } } })
-      : this.repo.count({
-          where: { product: { id: productId, active: true, deletedAt: null } },
-        });
+  async getCountForProduct(productId: Number, onlyAvailable = false): Promise<number> {
+    return onlyAvailable ?
+            this.repo.count({ where: { product: { id: productId } } }) :
+            this.repo.count({ where: { product: { id: productId, active: true, deletedAt: null } } });
+
   }
 
   /**
@@ -48,15 +44,10 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
    * @param onlyAvailable
    * @returns {Promise<Number>}
    */
-  async getCountForWarehouse(
-    warehouseId: number,
-    onlyAvailable = false,
-  ): Promise<number> {
-    return onlyAvailable
-      ? this.repo.count({ where: { warehouse: { id: warehouseId } } })
-      : this.repo.count({
-          where: { warehouse: { id: warehouseId, deletedAt: null } },
-        });
+   async getCountForWarehouse(warehouseId: Number, onlyAvailable = false): Promise<number> {
+    return onlyAvailable ?
+            this.repo.count({ where: { warehouse: { id: warehouseId } } }) :
+            this.repo.count({ where: { warehouse: { id: warehouseId, deletedAt: null } } });
   }
 
   /**
