@@ -24,7 +24,7 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
    * @returns {Promise<Number>}
    */
   async getCountForProduct(productId: Number, onlyAvailable = false): Promise<number> {
-    return onlyAvailable ? 
+    return onlyAvailable ?
             this.repo.count({ where: { product: { id: productId } } }) :
             this.repo.count({ where: { product: { id: productId, active: true, deletedAt: null } } });
 
@@ -37,7 +37,7 @@ export class WarehouseProductService extends TypeOrmCrudService<WarehouseProduct
    * @returns {Promise<Number>}
    */
    async getCountForWarehouse(warehouseId: Number, onlyAvailable = false): Promise<number> {
-    return onlyAvailable ? 
+    return onlyAvailable ?
             this.repo.count({ where: { warehouse: { id: warehouseId } } }) :
             this.repo.count({ where: { warehouse: { id: warehouseId, deletedAt: null } } });
   }

@@ -15,7 +15,7 @@ export class AuthService {
    * Validate User Credentials
    * @param email
    * @param password
-   * @returns 
+   * @returns
    */
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.userService.findOne({ where: { email: email } });
@@ -28,9 +28,9 @@ export class AuthService {
   }
 
   /**
-   * 
+   *
    * @param user Login to user account
-   * @returns 
+   * @returns
    */
   async login(user: User | any) {
     const payload = { sub: user.id };
@@ -40,9 +40,9 @@ export class AuthService {
   }
 
   /**
-   * 
+   *
    * @param user Login to user account
-   * @returns 
+   * @returns
    */
   async register(dto: RegisterDto) {
     const user = new User();
@@ -52,6 +52,6 @@ export class AuthService {
     user.active = false;
     user.suspendedAt = null;
     user.deletedAt = null;
-    return await this.userService.create(user);
+    return this.userService.create(user);
   }
 }

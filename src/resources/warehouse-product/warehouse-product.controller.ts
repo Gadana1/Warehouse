@@ -8,7 +8,7 @@ import { Crud, CrudController, CrudRequest, CrudRequestInterceptor, ParsedReques
 import { Permissions } from '../role/permissions/permissions.decorator';
 import { Permission } from '../role/permissions/permission.enum';
 
-// Use crud library to 
+// Use crud library to
 // Generates basic CRUD operations
 @Crud({
   // Define Model to use for CRUD

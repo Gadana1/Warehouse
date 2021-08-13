@@ -25,8 +25,8 @@ export class UserModule {
     this.setupDefaultAdmin();
   }
 
-  // TODO 
-  /** 
+  // TODO
+  /**
    * Set up default Administrative user on first launch
    */
   async setupDefaultAdmin() {

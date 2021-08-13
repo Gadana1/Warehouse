@@ -8,7 +8,7 @@ import { Permissions } from '../role/permissions/permissions.decorator';
 import { Permission } from '../role/permissions/permission.enum';
 import { ApiBearerAuth, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 
-// Use crud library to 
+// Use crud library to
 // Generates basic CRUD operations
 @Crud({
   // Define Model to use for CRUD

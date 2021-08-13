@@ -43,7 +43,7 @@ import { OrmConfig } from './configs/typeorm';
   controllers: [AppController],
   providers: [
     AppService,
-    // Global JWT Authentication 
+    // Global JWT Authentication
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

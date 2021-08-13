@@ -9,7 +9,7 @@ import { WarehouseProductService } from '../warehouse-product/warehouse-product.
 @Injectable()
 export class WarehouseService extends TypeOrmCrudService<Warehouse>  {
 
-  constructor(@InjectRepository(Warehouse) repo: Repository<Warehouse>, 
+  constructor(@InjectRepository(Warehouse) repo: Repository<Warehouse>,
               // Inject forward ref of service to handle circular dependencies
               @Inject(forwardRef(() => WarehouseProductService)) private warehouseProductService: WarehouseProductService) {
     super(repo);
@@ -18,7 +18,7 @@ export class WarehouseService extends TypeOrmCrudService<Warehouse>  {
 
   /**
    * Get One - Override to customize
-   * 
+   *
    * @override
    * @param {CrudRequest} req
    * @returns {Promise<Warehouse>}
