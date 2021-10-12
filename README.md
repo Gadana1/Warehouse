@@ -77,13 +77,13 @@ For a Warehouse Management system, data integrity is essential. In addition to t
 This is used for stocking and un-stocking products.
 It considers the fact that, one product can have multiple units in different warehouse
 and each of the units have unique information such as `barcode`, `Mfg Date`, `Expiry Date` etc.
-- Create Single Warehouse
-- Create Multiple Warehouses
-- View Single Warehouse
-- View All Warehouses (Paginated)
-- Update and Replace Single Warehouse
-- Delete Single Warehouse
-- Recover Deleted Warehouse
+- Create Single Warehouse Product
+- Create Multiple Warehouse Products
+- View Single Warehouse Product
+- View All Warehouse Products (Paginated)
+- Update and Replace Single Warehouse Product
+- Delete Single Warehouse Product
+- Recover Deleted Warehouse Product
  
  
 ## Security
